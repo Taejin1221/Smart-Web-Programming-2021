@@ -25,6 +25,6 @@ class HCSR04:
 
 		timeElapsed = stopTime - startTime
 
-		distance = ( timeElapsed * SONIC_SPEED ) / 2
+		distance = ( timeElapsed * self.SONIC_SPEED ) / 2
 
 		return distance

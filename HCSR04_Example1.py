@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-from hcsr import HCSR04
+from hcsr04 import HCSR04
 
 triggerPin = 20
 echoPin = 21
