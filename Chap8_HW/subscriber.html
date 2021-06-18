@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>JavaScript MQTT WebSocket Example</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"
+      type="text/javascript"
+    ></script>
+  </head>
+  <body>
+    <h1>JavaScript MQTT WebSocket Client1</h1>
+    Temperature:
+    <p id="temp"></p>
+    <script type="text/javascript">
+      var mqtt_client1;
+      var host = "test.mosquitto.org";
+      var port = 8081;
+
+      function onConnect() {
+        console.log("Connected to the Broker at " + host + ":" + port);
+        mqtt_client1.subscribe("taejin");
+      }
+
+      function onConnected(recon, url) {
+        console.log(" in onConnected " + reconn);
+      }
+
+      function onConnectionLost() {
+        console.log("connection lost");
+        setTimeout(start_mqtt_client1, 2000);
+      }
+
+      function onFailure(responseObject) {
+        console.log(
+          "Connection Failure Error[" +
+            responseObject.errorCode +
+            "] " +
+            responseObject.errorMessage
+        );
+        setTimeout(start_mqtt_client1, 2000);
+      }
+
+      function onMessageArrived(msg) {
+        out_msg =
+          'Message ["' +
+          msg.destinationName +
+          '", "' +
+          msg.payloadString +
+          '"] received.';
+        console.log(out_msg);
+
+        document.getElementsById("temp").innerHTML = msg.payloadString;
+      }
+
+      function start_mqtt_client1() {
+        console.log("Connecting to the Broker at " + host);
+        mqtt_client1 = new Paho.MQTT.Client(host, port, "subscriber");
+
+        mqtt_client1.onConnected = onConnected;
+        mqtt_client1.onConnectionLost = onConnectionLost;
+        mqtt_client1.onMessageArrived = onMessageArrived;
+        var connectOptions = {
+          onSuccess: onConnect,
+          onFailure: onFailure,
+          keepAliveInterval: 300,
+        };
+        mqtt_client1.connect(connectOptions);
+      }
+    </script>
+    <script>
+      start_mqtt_client1();
+    </script>
+  </body>
+</html>
