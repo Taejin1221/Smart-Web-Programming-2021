@@ -4,7 +4,7 @@ import time
 import Adafruit_BMP.BMP085 as BMP085
 
 def on_connect(client, userdata, flags, rc):
-    print("Connected");
+    print("Connected")
 
 def on_publish(client, userdata, result):
     print("data published")
@@ -24,7 +24,7 @@ sensor = BMP085.BMP085()
 
 try:
     while True:
-        pub1.publish("taejin", str(sensor.read_temperature()))
+        pub1.publish("SmartWebProgramming/Chap8", str(sensor.read_temperature()))
         pub1.loop()
         time.sleep(3)
 except KeyboardInterrupt:
