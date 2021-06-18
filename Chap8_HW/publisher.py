@@ -24,7 +24,7 @@ sensor = BMP085.BMP085()
 
 try:
     while True:
-        pub1.publish("taejin", sensor.read_temperature)
+        pub1.publish("taejin", str(sensor.read_temperature()))
         pub1.loop()
         time.sleep(3)
 except KeyboardInterrupt:

@@ -8,8 +8,7 @@
   </head>
   <body>
     <h1>JavaScript MQTT WebSocket Client1</h1>
-    Temperature:
-    <p id="temp"></p>
+    <h1>Temperature: <span id="temp"></span></h1>
     <script type="text/javascript">
       var mqtt_client1;
       var host = "test.mosquitto.org";
@@ -48,7 +47,7 @@
           '"] received.';
         console.log(out_msg);
 
-        document.getElementsById("temp").innerHTML = msg.payloadString;
+        document.getElementById("temp").innerText = msg.payloadString;
       }
 
       function start_mqtt_client1() {
